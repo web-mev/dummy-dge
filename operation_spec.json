@@ -1,5 +1,5 @@
 {
-    "name": "DESeq2", 
+    "name": "Dummy DGE", 
     "description": "Execute a simple differential expression analysis comparing two groups of samples.", 
     "inputs": {
         "raw_counts": {

@@ -1,0 +1,1 @@
+Rscript /opt/software/deseq2.R {{raw_counts}} {{base_condition_samples}} {{experimental_condition_samples}} {{base_condition_name}} {{experimental_condition_name}}

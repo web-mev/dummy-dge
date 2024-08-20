@@ -1,0 +1,80 @@
+{
+    "name": "DESeq2", 
+    "description": "Execute a simple differential expression analysis comparing two groups of samples.", 
+    "inputs": {
+        "raw_counts": {
+            "description": "The input raw count matrix. Must be an integer-based table.", 
+            "name": "Count matrix:", 
+            "required": true, 
+            "converter": "api.converters.data_resource.ECSSingleVariableDataResourceConverter",
+            "spec": {
+                "attribute_type": "VariableDataResource", 
+                "resource_types": ["I_MTX", "RNASEQ_COUNT_MTX"], 
+                "many": false
+            }
+        }, 
+        "annotations": {
+            "description": "An annotation table specifying which samples correspond to which groups", 
+            "name": "Sample annotations:", 
+            "required": true, 
+            "converter": "api.converters.data_resource.ECSSingleVariableDataResourceConverter",
+            "spec": {
+                "attribute_type": "DataResource", 
+                "resource_type": "ANN", 
+                "many": false
+            }
+        }, 
+        "ann_col": {
+            "description": "The name of the column in the annotation file to use. Note that this column must contain two or more unique values to perform a proper contrast. Samples in other groups are ignored.", 
+            "name": "Covariate:", 
+            "required": false,
+            "converter": "api.converters.basic_attributes.StringConverter",
+            "spec": {
+                "attribute_type": "String",
+                "default": "Control"
+            }
+        },
+        "base_condition_name": {
+            "description": "The condition that should be considered as the \"control\" or \"baseline\".", 
+            "name": "Base condition:", 
+            "required": false,
+            "converter": "api.converters.basic_attributes.StringConverter",
+            "spec": {
+                "attribute_type": "String",
+                "default": "Control"
+            }
+        },
+        "experimental_condition_name": {
+            "description": "The condition that should be considered as the \"non-control\" or \"experimental\".", 
+            "name": "Experimental/treated condition", 
+            "required": false, 
+            "converter": "api.converters.basic_attributes.StringConverter",
+            "spec": {
+                "attribute_type": "String",
+                "default": "Experimental"
+            }
+        }
+    }, 
+    "outputs": {
+        "dge_results": {
+            "required": true,
+            "converter": "api.converters.data_resource.ECSSingleDataResourceConverter",
+            "spec": {
+                "attribute_type": "DataResource", 
+                "resource_type": "FT",
+                "many": false
+            }
+        },
+        "normalized_counts": {
+            "required": true,
+            "converter": "api.converters.data_resource.ECSSingleDataResourceConverter",
+            "spec": {
+                "attribute_type": "DataResource", 
+                "resource_type": "EXP_MTX",
+                "many": false
+            }
+        }
+    }, 
+    "mode": "ecs",
+    "workspace_operation": true
+}

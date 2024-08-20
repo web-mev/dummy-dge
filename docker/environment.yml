@@ -1,0 +1,8 @@
+name: base
+channels:
+  - anaconda
+  - bioconda
+  - conda-forge
+dependencies:
+  - bioconductor-deseq2=1.42.0
+  - r-base=4.3.2
